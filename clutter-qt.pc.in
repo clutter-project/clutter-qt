@@ -1,0 +1,11 @@
+prefix=@prefix@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: clutter-qt
+Description: QT widget for Clutter
+Version: @VERSION@
+Libs: -L${libdir} -lclutter-qt-0.8
+Cflags: -I${includedir}/clutter-0.8/clutter-qt
+Requires: QtGui clutter-x11-0.8
