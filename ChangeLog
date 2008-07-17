@@ -1,3 +1,10 @@
+2008-07-17  Neil Roberts  <neil@o-hand.com>
+
+	* clutter-qt/clutter-qt.h: 
+	* clutter-qt/clutter-qt.cc: 
+	(ClutterQt::getModifierState): Change to be a static member function
+	(ClutterQt::stage): Change to be a const member function
+
 2008-07-16  Neil Roberts  <neil@o-hand.com>
 
 	* examples/Makefile.am (testqt_SOURCES): Added testqt.h so that it

@@ -38,7 +38,7 @@ public:
   ClutterQt (QWidget *parent = 0);
   ~ClutterQt ();
 
-  ClutterActor *stage ();
+  ClutterActor *stage () const;
 
   static ClutterInitError init (int *argc, char ***argv);
 
@@ -60,7 +60,7 @@ private:
   void resetWindow (QWidget *parent);
   void mousePressOrReleaseEvent (QMouseEvent *event);
   void keyPressOrReleaseEvent (QKeyEvent *event);
-  ClutterModifierType getModifierState (QInputEvent *event);
+  static ClutterModifierType getModifierState (QInputEvent *event);
 };
 
 #endif /* CLUTTER_QT_H */

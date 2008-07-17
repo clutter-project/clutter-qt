@@ -317,7 +317,7 @@ ClutterQt::keyReleaseEvent (QKeyEvent *event)
 }
 
 ClutterActor *
-ClutterQt::stage ()
+ClutterQt::stage () const
 {
   return priv->stage;
 }
