@@ -317,7 +317,8 @@ MainWin::onInput (ClutterActor    *actor,
 	clutter_stage_set_key_focus (stage, actor);
       break;
     case CLUTTER_SCROLL:
-      g_print ("BUTTON SCROLL (click count:%i)",
+      g_print ("BUTTON SCROLL %s (click count:%i)",
+	       event->scroll.direction == CLUTTER_SCROLL_UP ? "up" : "down",
 	       event->button.click_count);
       break;
     default:

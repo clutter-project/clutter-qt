@@ -1,3 +1,11 @@
+2008-09-16  Neil Roberts  <neil@linux.intel.com>
+
+	* clutter-qt/clutter-qt.h: 
+	* clutter-qt/clutter-qt.cc: Forward scroll events to Clutter.
+
+	* examples/testqt.cc (MainWin::onInput): Print the direction when
+	a scroll event is detected.
+
 2008-07-17  Neil Roberts  <neil@o-hand.com>
 
 	* clutter-qt/clutter-qt.h: 

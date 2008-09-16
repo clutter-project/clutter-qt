@@ -41,6 +41,8 @@ struct ClutterQtPrivate
   ClutterActor *stage;
 
   QTime time;
+
+  int scrollPos;
 };
 
 ClutterInitError
@@ -59,6 +61,8 @@ ClutterQt::ClutterQt (QWidget *parent)
 
   /* we always create new stages rather than use the default */
   priv->stage = clutter_stage_new ();
+
+  priv->scrollPos = 0;
       
   /* we must realize the stage to get it ready for embedding */
   clutter_actor_realize (priv->stage);
@@ -314,6 +318,41 @@ void
 ClutterQt::keyReleaseEvent (QKeyEvent *event)
 {
   keyPressOrReleaseEvent (event);
+}
+
+void
+ClutterQt::wheelEvent (QWheelEvent *event)
+{
+  ClutterEvent cevent;
+
+  /* Accumulate scroll changes until we get enough to count as a
+     Clutter event */
+  priv->scrollPos += event->delta ();
+
+  if (ABS (priv->scrollPos) >= MIN_WHEEL_DELTA)
+    {
+      memset (&cevent, 0, sizeof (cevent));
+      
+      cevent.type = CLUTTER_SCROLL;
+      cevent.any.stage = CLUTTER_STAGE (priv->stage);
+      cevent.scroll.x = event->x ();
+      cevent.scroll.y = event->y ();
+      cevent.scroll.time = priv->time.elapsed ();
+      cevent.scroll.modifier_state = getModifierState (event);
+
+      if (priv->scrollPos > 0)
+	{
+	  cevent.scroll.direction = CLUTTER_SCROLL_UP;
+	  priv->scrollPos -= MIN_WHEEL_DELTA;
+	}
+      else
+	{
+	  cevent.scroll.direction = CLUTTER_SCROLL_DOWN;
+	  priv->scrollPos += MIN_WHEEL_DELTA;
+	}
+
+      clutter_do_event (&cevent);
+    }
 }
 
 ClutterActor *

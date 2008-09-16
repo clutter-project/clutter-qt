@@ -57,9 +57,12 @@ protected:
 private:
   ClutterQtPrivate *priv;
 
+  enum { MIN_WHEEL_DELTA = 120 };
+
   void resetWindow (QWidget *parent);
   void mousePressOrReleaseEvent (QMouseEvent *event);
   void keyPressOrReleaseEvent (QKeyEvent *event);
+  void wheelEvent (QWheelEvent *event);
   static ClutterModifierType getModifierState (QInputEvent *event);
 };
 
