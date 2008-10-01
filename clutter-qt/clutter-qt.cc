@@ -48,6 +48,7 @@ struct ClutterQtPrivate
 ClutterInitError
 ClutterQt::init (int *argc, char ***argv)
 {
+  g_type_init ();
   clutter_x11_set_display (QX11Info::display ());
   clutter_x11_disable_event_retrieval ();
 

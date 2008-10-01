@@ -1,3 +1,9 @@
+2008-10-01  Tomas Frydrych  <tf@linux.intel.com>
+
+	* clutter-qt/clutter-qt.cc:
+	(ClutterQt::init):
+	Call g_type_init() before using ClutterX11 api.
+
 2008-09-16  Neil Roberts  <neil@linux.intel.com>
 
 	* clutter-qt/clutter-qt.h: 
