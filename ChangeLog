@@ -1,3 +1,11 @@
+2008-11-14  Neil Roberts  <neil@linux.intel.com>
+
+	Bug 1260 - Clutter-qt should not need to use dynamic_cast
+
+	* clutter-qt/clutter-qt.cc (ClutterQt::getModifierState): Get the
+	event type instead of using a dynamic cast because Qt can be
+	compiled without RTTI. Thanks to Denis Kenzior for the patch.
+
 2008-10-01  Tomas Frydrych  <tf@linux.intel.com>
 
 	* clutter-qt/clutter-qt.cc:

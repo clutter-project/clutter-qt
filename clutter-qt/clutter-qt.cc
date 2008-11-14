@@ -195,7 +195,10 @@ ClutterQt::getModifierState (QInputEvent *event)
   if ((qmods & Qt::MetaModifier))
     ret |= CLUTTER_MOD2_MASK;
 
-  if (dynamic_cast<QMouseEvent *> (event))
+  if (event->type() == QEvent::MouseButtonPress ||
+      event->type() == QEvent::MouseButtonDblClick ||
+      event->type() == QEvent::MouseButtonRelease ||
+      event->type() == QEvent::MouseMove)
     {
       QMouseEvent *mouse_event = static_cast<QMouseEvent *> (event);
       Qt::MouseButtons buttons = mouse_event->buttons ();
