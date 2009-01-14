@@ -26,9 +26,7 @@
 #include <QGridLayout>
 #include <QLineEdit>
 
-#include <clutter/clutter-actor.h>
-#include <clutter/clutter-timeline.h>
-#include <clutter/clutter-event.h>
+#include <clutter/clutter.h>
 #include <clutter-qt/clutter-qt.h>
 
 class MainWin : public QWidget

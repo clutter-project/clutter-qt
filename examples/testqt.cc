@@ -101,7 +101,8 @@ MainWin::MainWin (QWidget *parent)
                               STAGE_HEIGHT / 2
 			      - clutter_actor_get_height (hand) / 2);
 
-  entry = clutter_entry_new_with_text ("Sans 10", "");
+  entry = clutter_text_new_with_text ("Sans 10", "");
+  clutter_text_set_editable (CLUTTER_TEXT (entry), TRUE);
   clutter_actor_set_size (entry, 500, 20);
   clutter_container_add (CLUTTER_CONTAINER (cqt.stage ()), entry, NULL);
   QObject::connect (&edit, SIGNAL (textChanged(const QString&)),
@@ -131,7 +132,7 @@ MainWin::~MainWin ()
 void
 MainWin::onEditChanged (const QString &str)
 {
-  clutter_entry_set_text (CLUTTER_ENTRY (entry), str.toUtf8 ().constData ());
+  clutter_text_set_text (CLUTTER_TEXT (entry), str.toUtf8 ().constData ());
 }
 
 void

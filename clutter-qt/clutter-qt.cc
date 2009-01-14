@@ -26,7 +26,7 @@
 #include <QTime>
 #include <QX11Info>
 
-#include <clutter/clutter-stage.h>
+#include <clutter/clutter.h>
 #include <clutter/x11/clutter-x11.h>
 
 /* These two are defined in the X11 headers included by clutter-x11.h

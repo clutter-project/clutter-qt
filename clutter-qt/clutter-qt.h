@@ -24,9 +24,7 @@
 
 #include <QWidget>
 #include <QInputEvent>
-#include <clutter/clutter-stage.h>
-#include <clutter/clutter-main.h>
-#include <clutter/clutter-event.h>
+#include <clutter/clutter.h>
 
 class ClutterQtPrivate;
 
