@@ -141,10 +141,15 @@ ClutterQt::resizeEvent (QResizeEvent *event)
   /* Chain up */
   QWidget::resizeEvent (event);
 
-  /* Pass on the size to the stage */
+  /* change the size of the stage and ensure that the viewport
+   * has been updated as well
+   */
   clutter_actor_set_size (priv->stage,
 			  event->size ().width (),
 			  event->size ().height ());
+
+
+  clutter_stage_ensure_viewport (CLUTTER_STAGE (priv->stage));
 }
 
 void
