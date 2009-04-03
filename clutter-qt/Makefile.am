@@ -1,3 +1,5 @@
+NULL =
+
 INCLUDES = \
 	-I$(srcdir) 				\
 	-I$(top_srcdir) 			\
@@ -9,13 +11,18 @@ INCLUDES = \
 	$(CLUTTER_CFLAGS) 			\
 	$(QT_CFLAGS)
 
-lib_LTLIBRARIES = libclutter-qt-0.8.la
+lib_LTLIBRARIES = libclutter-qt-@CLUTTER_QT_API_VERSION@.la
 
-libclutter_qt_0_8_la_SOURCES = clutter-qt.cc moc_clutter-qt.cc
-libclutter_qt_0_8_la_LIBADD = $(CLUTTER_LIBS) $(QT_LIBS)
-libclutter_qt_0_8_la_LDFLAGS = $(CLUTTER_LT_LDFLAGS)
+source_cc = \
+	moc_clutter-qt.cc	\
+	clutter-qt.c		\
+	$(NULL)
 
-clutterqtheadersdir = $(includedir)/clutter-0.8/clutter-qt
+libclutter_qt_@CLUTTER_QT_API_VERSION@_la_SOURCES = $(source_cc)
+libclutter_qt_@CLUTTER_QT_API_VERSION@_la_LIBADD  = $(CLUTTER_LIBS) $(QT_LIBS)
+libclutter_qt_@CLUTTER_QT_API_VERSION@_la_LDFLAGS = $(CLUTTER_LT_LDFLAGS)
+
+clutterqtheadersdir = $(includedir)/clutter-@CLUTTER_QT_API_VERSION@/clutter-qt
 clutterqtheaders_HEADERS = clutter-qt.h
 
 moc_clutter-qt.cc: clutter-qt.h

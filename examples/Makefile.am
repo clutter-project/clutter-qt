@@ -10,10 +10,10 @@ INCLUDES = \
 AM_CPPFLAGS = $(CLUTTER_CFLAGS) $(QT_CFLAGS)
 
 common_deps = \
-	$(top_builddir)/clutter-qt/libclutter-qt-0.8.la
+      $(top_builddir)/clutter-qt/libclutter-qt-@CLUTTER_QT_API_VERSION@.la
 
 common_ldadd = \
-	$(top_builddir)/clutter-qt/libclutter-qt-0.8.la \
+	$(top_builddir)/clutter-qt/libclutter-qt-@CLUTTER_QT_API_VERSION@.la \
 	$(CLUTTER_LIBS)	\
 	$(QT_LIBS)
 

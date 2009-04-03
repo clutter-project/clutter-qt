@@ -2,7 +2,7 @@
 # An odd micro number indicates in-progress development, (eg. from CVS)
 # An even micro number indicates a released version.
 m4_define([clutter_major_version], [0])
-m4_define([clutter_minor_version], [8])
+m4_define([clutter_minor_version], [9])
 m4_define([clutter_micro_version], [0])
 
 m4_define([clutter_version],
@@ -30,10 +30,12 @@ CLUTTER_QT_MAJOR_VERSION=clutter_major_version
 CLUTTER_QT_MINOR_VERSION=clutter_minor_version
 CLUTTER_QT_MICRO_VERSION=clutter_micro_version
 CLUTTER_QT_VERSION=clutter_version
+CLUTTER_QT_API_VERSION=clutter_api_version
 AC_SUBST(CLUTTER_QT_MAJOR_VERSION)
 AC_SUBST(CLUTTER_QT_MINOR_VERSION)
 AC_SUBST(CLUTTER_QT_MICRO_VERSION)
 AC_SUBST(CLUTTER_QT_VERSION)
+AC_SUBST(CLUTTER_QT_API_VERSION)
 
 m4_define([lt_current],
           [m4_eval(100 * clutter_minor_version + clutter_micro_version - clutter_interface_age)])
