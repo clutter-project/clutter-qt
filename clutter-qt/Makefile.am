@@ -19,6 +19,6 @@ clutterqtheadersdir = $(includedir)/clutter-0.8/clutter-qt
 clutterqtheaders_HEADERS = clutter-qt.h
 
 moc_clutter-qt.cc: clutter-qt.h
-	moc $(DEFINES) $(INCPATH) $< -o $@
+	$(QT_MOC) $(DEFINES) $(INCPATH) $< -o $@
 
 CLEANFILES = moc_clutter-qt.cc

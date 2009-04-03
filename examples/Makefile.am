@@ -22,7 +22,7 @@ testqt_DEPENDENCIES = $(common_deps)
 testqt_LDADD = $(common_ldadd)
 
 moc_testqt.cc: testqt.h
-	moc $(DEFINES) $(INCPATH) $< -o $@
+	$(QT_MOC) $(DEFINES) $(INCPATH) $< -o $@
 
 EXTRA_DIST = redhand.png
 

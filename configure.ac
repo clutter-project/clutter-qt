@@ -56,6 +56,12 @@ AC_PROG_CXX
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
 
+dnl ========================================================================
+
+AC_ARG_WITH(qt_moc, AS_HELP_STRING([--with-moc=<path>],[moc for Qt4]))
+
+dnl ========================================================================
+
 # Checks for header files.
 AC_HEADER_STDC
 AC_CHECK_HEADERS([fcntl.h stdlib.h string.h unistd.h])
@@ -76,6 +82,21 @@ AC_SUBST(CLUTTER_LIBS)
 PKG_CHECK_MODULES(QT, QtCore >= 4.2 QtGui >= 4.2 glib-2.0 clutter-0.9)
 AC_SUBST(QT_CFLAGS)
 AC_SUBST(QT_LIBS)
+
+dnl ========================================================================
+
+if test -z "$with_moc" ; then
+        AC_PATH_PROG(QT_MOC, moc-qt4, no)
+        if test x"$QT_MOC" = xno; then
+                AC_PATH_PROG(QT_MOC, moc, no)
+        fi
+        if test x"$QT_MOC" = xno; then
+                AC_MSG_ERROR([Could not find moc])
+        fi
+else
+        QT_MOC=$with_moc
+        AC_SUBST(QT_MOC)
+fi
 
 dnl ========================================================================
 
