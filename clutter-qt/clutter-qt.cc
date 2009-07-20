@@ -64,7 +64,7 @@ ClutterQt::ClutterQt (QWidget *parent)
   priv->stage = clutter_stage_new ();
 
   priv->scrollPos = 0;
-      
+
   /* we must realize the stage to get it ready for embedding */
   clutter_actor_realize (priv->stage);
 
@@ -87,15 +87,15 @@ ClutterQt::resetWindow (QWidget *parent)
   XSetWindowAttributes xattr;
   unsigned long mask;
   const QX11Info &x11info = x11Info ();
-  
+
   /* Create an X11 window using the visual and colormap that
      clutter expects */
-  
-  /* window attributes */  
+
+  /* window attributes */
   xattr.background_pixel = WhitePixel (QX11Info::display (),
-				       x11info.screen ());
+                                       x11info.screen ());
   xattr.border_pixel = 0;
-  
+
   Qt::HANDLE parent_win;
 
   if (parent)
@@ -105,20 +105,20 @@ ClutterQt::resetWindow (QWidget *parent)
 
   const XVisualInfo *xvinfo
     = clutter_x11_get_stage_visual (CLUTTER_STAGE (priv->stage));
-  
+
   xattr.colormap = XCreateColormap (QX11Info::display (),
-				    parent_win,
-				    xvinfo->visual,
-				    AllocNone);
+                                    parent_win,
+                                    xvinfo->visual,
+                                    AllocNone);
   mask = CWBackPixel | CWBorderPixel | CWColormap;
   WId win = XCreateWindow (QX11Info::display (),
-			   parent_win,
-			   0, 0, 1, 1,
-			   0,
-			   xvinfo->depth,
-			   InputOutput,
-			   xvinfo->visual,
-			   mask, &xattr);
+                           parent_win,
+                           0, 0, 1, 1,
+                           0,
+                           xvinfo->depth,
+                           InputOutput,
+                           xvinfo->visual,
+                           mask, &xattr);
 
   clutter_x11_set_stage_foreign (CLUTTER_STAGE (priv->stage), win);
   clutter_actor_queue_redraw (CLUTTER_ACTOR (priv->stage));
@@ -145,8 +145,8 @@ ClutterQt::resizeEvent (QResizeEvent *event)
    * has been updated as well
    */
   clutter_actor_set_size (priv->stage,
-			  event->size ().width (),
-			  event->size ().height ());
+                          event->size ().width (),
+                          event->size ().height ());
 
 
   clutter_stage_ensure_viewport (CLUTTER_STAGE (priv->stage));
@@ -209,11 +209,11 @@ ClutterQt::getModifierState (QInputEvent *event)
       Qt::MouseButtons buttons = mouse_event->buttons ();
 
       if ((buttons & Qt::LeftButton))
-	ret |= CLUTTER_BUTTON1_MASK;
+        ret |= CLUTTER_BUTTON1_MASK;
       if ((buttons & Qt::MidButton))
-	ret |= CLUTTER_BUTTON2_MASK;
+        ret |= CLUTTER_BUTTON2_MASK;
       if ((buttons & Qt::RightButton))
-	ret |= CLUTTER_BUTTON3_MASK;
+        ret |= CLUTTER_BUTTON3_MASK;
     }
 
   return (ClutterModifierType) ret;
@@ -241,7 +241,7 @@ ClutterQt::mouseMoveEvent (QMouseEvent *event)
    * processes.
    * *could* be side effects with below though doubful as no other
    * events reach the queue (we shut down event collection). Maybe
-   * a peek_mask type call could be even safer. 
+   * a peek_mask type call could be even safer.
   */
   while (clutter_events_pending())
     {
@@ -341,7 +341,7 @@ ClutterQt::wheelEvent (QWheelEvent *event)
   if (ABS (priv->scrollPos) >= MIN_WHEEL_DELTA)
     {
       memset (&cevent, 0, sizeof (cevent));
-      
+
       cevent.type = CLUTTER_SCROLL;
       cevent.any.stage = CLUTTER_STAGE (priv->stage);
       cevent.scroll.x = event->x ();
@@ -350,15 +350,15 @@ ClutterQt::wheelEvent (QWheelEvent *event)
       cevent.scroll.modifier_state = getModifierState (event);
 
       if (priv->scrollPos > 0)
-	{
-	  cevent.scroll.direction = CLUTTER_SCROLL_UP;
-	  priv->scrollPos -= MIN_WHEEL_DELTA;
-	}
+        {
+          cevent.scroll.direction = CLUTTER_SCROLL_UP;
+          priv->scrollPos -= MIN_WHEEL_DELTA;
+        }
       else
-	{
-	  cevent.scroll.direction = CLUTTER_SCROLL_DOWN;
-	  priv->scrollPos += MIN_WHEEL_DELTA;
-	}
+        {
+          cevent.scroll.direction = CLUTTER_SCROLL_DOWN;
+          priv->scrollPos += MIN_WHEEL_DELTA;
+        }
 
       clutter_do_event (&cevent);
     }

@@ -41,21 +41,21 @@ struct SpinControl
 
 static SpinControl
 spin_controls[] = { { "Rotate x-axis",
-		      SLOT (onSpinX(int)),
-		      SLOT (onAnimateX(int)),
-		      0, 360 },
-		    { "Rotate y-axis",
-		      SLOT (onSpinY(int)),
-		      SLOT (onAnimateY(int)),
-		      0, 360 },
-		    { "Rotate z-axis",
-		      SLOT (onSpinZ(int)),
-		      SLOT (onAnimateZ(int)),
-		      0, 360 },
-		    { "Adjust opacity",
-		      SLOT (onAdjustOpacity(int)),
-		      SLOT (onAnimateOpacity(int)),
-		      255, 255 } };
+                      SLOT (onSpinX(int)),
+                      SLOT (onAnimateX(int)),
+                      0, 360 },
+                    { "Rotate y-axis",
+                      SLOT (onSpinY(int)),
+                      SLOT (onAnimateY(int)),
+                      0, 360 },
+                    { "Rotate z-axis",
+                      SLOT (onSpinZ(int)),
+                      SLOT (onAnimateZ(int)),
+                      0, 360 },
+                    { "Adjust opacity",
+                      SLOT (onAdjustOpacity(int)),
+                      SLOT (onAnimateOpacity(int)),
+                      255, 255 } };
 
 #define STAGE_WIDTH  640
 #define STAGE_HEIGHT 480
@@ -67,9 +67,9 @@ MainWin::MainWin (QWidget *parent)
   cqt.setFocusPolicy(Qt::StrongFocus);
   const QColor &bg_color = cqt.palette ().color (QPalette::Window);
   ClutterColor clutter_bg_color = { bg_color.red (),
-				    bg_color.green (),
-				    bg_color.blue (),
-				    255 };
+                                    bg_color.green (),
+                                    bg_color.blue (),
+                                    255 };
   clutter_stage_set_color (CLUTTER_STAGE (cqt.stage ()), &clutter_bg_color);
 
   layout.addWidget (&edit, 0, 0, 1, 4);
@@ -85,34 +85,34 @@ MainWin::MainWin (QWidget *parent)
       spin_box->setValue (spin_controls[i].default_value);
       layout.addWidget (spin_box, i + 1, 2);
       QObject::connect (spin_box, SIGNAL (valueChanged(int)),
-			this, spin_controls[i].value_slot);
+                        this, spin_controls[i].value_slot);
 
       QCheckBox *check_box = new QCheckBox("Animate");
       layout.addWidget (check_box, i + 1, 3);
       QObject::connect (check_box, SIGNAL (stateChanged(int)),
-			this, spin_controls[i].animate_slot);
+                        this, spin_controls[i].animate_slot);
     }
 
   hand = clutter_texture_new_from_file ("redhand.png", NULL);
   clutter_container_add (CLUTTER_CONTAINER (cqt.stage ()), hand, NULL);
   clutter_actor_set_position (hand,
                               STAGE_WIDTH / 2
-			      - clutter_actor_get_width (hand) / 2,
+                              - clutter_actor_get_width (hand) / 2,
                               STAGE_HEIGHT / 2
-			      - clutter_actor_get_height (hand) / 2);
+                              - clutter_actor_get_height (hand) / 2);
 
   entry = clutter_text_new_with_text ("Sans 10", "");
   clutter_text_set_editable (CLUTTER_TEXT (entry), TRUE);
   clutter_actor_set_size (entry, 500, 20);
   clutter_container_add (CLUTTER_CONTAINER (cqt.stage ()), entry, NULL);
   QObject::connect (&edit, SIGNAL (textChanged(const QString&)),
-		    this, SLOT (onEditChanged(const QString&)));
+                    this, SLOT (onEditChanged(const QString&)));
 
   tl = clutter_timeline_new (8000);
   clutter_timeline_set_loop (tl, TRUE);
   clutter_timeline_start (tl);
   g_signal_connect (tl, "new-frame",
-		    G_CALLBACK (MainWin::onNewFrame), this);
+                    G_CALLBACK (MainWin::onNewFrame), this);
 
   animateX = false;
   animateY = false;
@@ -151,7 +151,7 @@ MainWin::onSpinY (int angle)
   clutter_actor_set_rotation (hand, CLUTTER_Y_AXIS,
                               angle,
                               clutter_actor_get_width (hand) / 2,
-			      0,
+                              0,
                               0);
 }
 
@@ -256,23 +256,23 @@ void
 MainWin::printMouseModifiers (ClutterModifierType state)
 {
   if (state & (CLUTTER_BUTTON1_MASK | CLUTTER_BUTTON2_MASK
-	       | CLUTTER_BUTTON3_MASK))
+               | CLUTTER_BUTTON3_MASK))
     {
       printf (" Mouse(");
       if ((state & CLUTTER_BUTTON1_MASK))
-	printf ("1");
+        printf ("1");
       if ((state & CLUTTER_BUTTON2_MASK))
-	printf ("2");
+        printf ("2");
       if ((state & CLUTTER_BUTTON3_MASK))
-	printf ("3");
+        printf ("3");
       fputc (')', stdout);
     }
 }
 
 gboolean
 MainWin::onInput (ClutterActor    *actor,
-		  ClutterEvent    *event,
-		  MainWin         *main_win)
+                  ClutterEvent    *event,
+                  MainWin         *main_win)
 {
   ClutterStage *stage = CLUTTER_STAGE (main_win->cqt.stage ());
   gchar keybuf[128];
@@ -300,25 +300,25 @@ MainWin::onInput (ClutterActor    *actor,
       g_print ("LEAVE");
       break;
     case CLUTTER_BUTTON_PRESS:
-      g_print ("BUTTON PRESS (click count:%i)", 
-	       event->button.click_count);
+      g_print ("BUTTON PRESS (click count:%i)",
+               event->button.click_count);
       printMouseModifiers (event->button.modifier_state);
       break;
     case CLUTTER_BUTTON_RELEASE:
-      g_print ("BUTTON RELEASE (click count:%i)", 
-	       event->button.click_count);
+      g_print ("BUTTON RELEASE (click count:%i)",
+               event->button.click_count);
       printMouseModifiers (event->button.modifier_state);
 
       if (clutter_event_get_source (event) == CLUTTER_ACTOR (stage))
         clutter_stage_set_key_focus (stage, NULL);
       else if (clutter_event_get_source (event) == actor
-	       && clutter_actor_get_parent (actor) == CLUTTER_ACTOR (stage))
-	clutter_stage_set_key_focus (stage, actor);
+               && clutter_actor_get_parent (actor) == CLUTTER_ACTOR (stage))
+        clutter_stage_set_key_focus (stage, actor);
       break;
     case CLUTTER_SCROLL:
       g_print ("BUTTON SCROLL %s (click count:%i)",
-	       event->scroll.direction == CLUTTER_SCROLL_UP ? "up" : "down",
-	       event->button.click_count);
+               event->scroll.direction == CLUTTER_SCROLL_UP ? "up" : "down",
+               event->button.click_count);
       break;
     default:
       return FALSE;
@@ -326,7 +326,7 @@ MainWin::onInput (ClutterActor    *actor,
 
   if (clutter_event_get_source (event) == actor)
     g_print (" *source*");
-  
+
   g_print ("\n");
 
   return FALSE;

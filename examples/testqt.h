@@ -55,14 +55,14 @@ private:
   ClutterQt cqt;
   QLineEdit edit;
   QGridLayout layout;
-  
+
   bool animateX, animateY, animateZ, animateOpacity;
 
   static void onNewFrame (ClutterTimeline *tl, gint frame_num,
-			  MainWin *main_win);
+                          MainWin *main_win);
   static void fillKeybuf (char *keybuf, ClutterKeyEvent *event);
   static gboolean onInput (ClutterActor *actor, ClutterEvent *event,
-			   MainWin *main_win);
+                           MainWin *main_win);
   static void printMouseModifiers (ClutterModifierType state);
 };
 
