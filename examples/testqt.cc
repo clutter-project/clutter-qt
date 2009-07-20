@@ -108,7 +108,7 @@ MainWin::MainWin (QWidget *parent)
   QObject::connect (&edit, SIGNAL (textChanged(const QString&)),
 		    this, SLOT (onEditChanged(const QString&)));
 
-  tl = clutter_timeline_new_for_duration (8000);
+  tl = clutter_timeline_new (8000);
   clutter_timeline_set_loop (tl, TRUE);
   clutter_timeline_start (tl);
   g_signal_connect (tl, "new-frame",
@@ -198,15 +198,13 @@ MainWin::onAnimateOpacity (int state)
 void
 MainWin::onNewFrame (ClutterTimeline *tl, gint frame_num, MainWin *main_win)
 {
-  int num_frames = clutter_timeline_get_n_frames (tl);
+  gdouble progress = clutter_timeline_get_progress (tl) * 2.0;
 
-  frame_num *= 2;
+  if (progress >= 1.0)
+    progress = 2.0 - progress;
 
-  if (frame_num >= num_frames)
-    frame_num = 2 * num_frames - frame_num;
-
-  int angle = frame_num * 360 / (num_frames - 1);
-  int opacity = frame_num * 255 / (num_frames - 1);
+  int angle = progress * 360;
+  int opacity = progress * 255;
 
   if (main_win->animateX)
     main_win->onSpinX (angle);
