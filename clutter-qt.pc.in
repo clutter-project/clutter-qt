@@ -7,5 +7,5 @@ Name: clutter-qt
 Description: QT widget for Clutter
 Version: @VERSION@
 Libs: -L${libdir} -lclutter-qt-@CLUTTER_QT_API_VERSION@
-Cflags: -I${includedir}/clutter-@CLUTTER_QT_API_VERSION@/clutter-qt
+Cflags: -I${includedir}/clutter-@CLUTTER_QT_API_VERSION@
 Requires: QtGui clutter-x11-@CLUTTER_QT_API_VERSION@
