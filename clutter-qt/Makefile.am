@@ -15,7 +15,7 @@ lib_LTLIBRARIES = libclutter-qt-@CLUTTER_QT_API_VERSION@.la
 
 source_cc = \
 	moc_clutter-qt.cc	\
-	clutter-qt.c		\
+	clutter-qt.cc		\
 	$(NULL)
 
 libclutter_qt_@CLUTTER_QT_API_VERSION@_la_SOURCES = $(source_cc)
