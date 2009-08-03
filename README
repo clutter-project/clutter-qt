@@ -6,7 +6,7 @@ default ClutterStage into any parent QtWidget.
 
 Requirements:
 
-  Clutter >= 0.8.0 (X11 backend)
+  Clutter >= 1.0.0 (X11 backend)
   Qt >= 4.2
 
 Copyright (C) 2008  OpenedHand
