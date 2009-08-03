@@ -1,8 +1,8 @@
 # clutter package version number, (as distinct from shared library version)
 # An odd micro number indicates in-progress development, (eg. from CVS)
 # An even micro number indicates a released version.
-m4_define([clutter_major_version], [0])
-m4_define([clutter_minor_version], [9])
+m4_define([clutter_major_version], [1])
+m4_define([clutter_minor_version], [0])
 m4_define([clutter_micro_version], [0])
 
 m4_define([clutter_version],
@@ -76,12 +76,12 @@ AC_FUNC_MALLOC
 AC_FUNC_MMAP
 AC_CHECK_FUNCS([memset munmap strcasecmp strdup])
 
-CLUTTER_REQUIRED=0.9.0
+CLUTTER_REQUIRED=1.0.0
 
 AC_SUBST(CLUTTER_CFLAGS)
 AC_SUBST(CLUTTER_LIBS)
 
-PKG_CHECK_MODULES(QT, QtCore >= 4.2 QtGui >= 4.2 glib-2.0 clutter-0.9)
+PKG_CHECK_MODULES(QT, QtCore >= 4.2 QtGui >= 4.2 glib-2.0 clutter-1.0)
 AC_SUBST(QT_CFLAGS)
 AC_SUBST(QT_LIBS)
 
