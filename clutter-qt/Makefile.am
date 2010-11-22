@@ -6,6 +6,7 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"Clutter-Qt\" 		\
 	-DPREFIX=\""$(prefix)"\" 		\
 	-DLIBDIR=\""$(libdir)"\" 		\
+	-DQT_NO_KEYWORDS			\
 	$(CLUTTER_DEBUG_FLAGS) 			\
 	$(GCC_FLAGS) 				\
 	$(CLUTTER_CFLAGS) 			\

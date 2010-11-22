@@ -4,6 +4,7 @@ noinst_PROGRAMS = \
 	testqt
 
 INCLUDES = \
+	-DQT_NO_KEYWORDS \
 	-I$(srcdir) \
 	-I$(top_srcdir)
 

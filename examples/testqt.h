@@ -37,7 +37,7 @@ public:
   MainWin (QWidget *parent = NULL);
   ~MainWin ();
 
-public slots:
+public Q_SLOTS:
   void onEditChanged (const QString &str);
   void onSpinX (int angle);
   void onSpinY (int angle);
